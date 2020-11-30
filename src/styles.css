@@ -1,0 +1,238 @@
+body {
+    font-family: 'Old Standard TT', serif;
+    margin: 0px; 
+}
+
+header {
+    background-color: #f7d0bc;
+}
+
+.img-logo {
+    width: 400px;
+    padding-top: 1.5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.nav-item-custom {
+    margin: 18px 70px 18px 70px;
+}
+
+
+.menu a {
+    text-decoration: none;
+    font-family: 'Old Standard TT', serif;
+    font-size: 17px;
+    color: white;
+}  
+ 
+a:hover {
+    color: #ff4f75;
+}
+
+
+.parallax {
+    background-image: url(./images/jewel4.jpg);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 850px;
+}
+
+.second-image {
+    background-image: url(./images/jewel0.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    
+}
+
+.welcome-text {
+    color: rgb(0, 0, 0);
+    font-family: 'Old Standard TT', serif;
+    background-color: rgba(255, 255, 255, 0.932);
+    text-align: center;
+    padding: 15px 10px 150px 10px;
+    width: 600px;
+    height: 160px;
+    font-size: 25px;
+    position: relative;
+    top: 35%;
+}
+
+main {
+    background-color: white;
+    font-size: 23px;
+    text-align: center;
+}
+
+.texto-1 {
+    font-family: 'Old Standard TT', serif;
+    margin: 70px auto;
+}
+
+footer {
+    margin: 0px;
+    padding: 70px 50px 20px 50px;
+    background-color: rgb(53, 49, 49);
+    color: white;
+    font-family: 'Old Standard TT', serif;
+    font-weight: normal;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.texto-padrao {
+    font-size: 20px;
+}
+
+#titulo {
+    font-size: 30px;
+}
+
+.nossas-lojas {
+    width: 100%;
+    text-align: center;
+    font-size: 19px;
+}
+
+
+.categorias {
+    display: block;
+    margin-left: 60px;
+    float: left;
+    padding-left: 15px;
+    font-size: 20px;
+}
+
+.categorias li:hover {
+    color: #ff4f75;
+    cursor: pointer;
+}
+
+.produtos {
+    width: 100%;
+    margin-right: 10px;
+    margin-bottom: 150px;
+    
+}
+
+.box-produto {
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.box-produto:hover {
+    box-shadow: 0px 0px 14px 0px #8080804d;
+    cursor: pointer;
+}
+
+.nome-produto, .modal-nome-produto {
+    font-size: 20px;
+}
+
+.antigo-preco, .modal-antigo-preco {
+    font-size: 15px;
+    text-decoration: line-through;
+}
+
+.novo-preco, .modal-novo-preco{
+    color: hotpink;
+    font-size: 18px;
+}
+
+.modal-box-produto {
+    text-align: center;
+}
+
+.modal-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.404);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.modal1 {
+    width: 480px;
+    height: 550px;
+    background-color: white;
+    position: relative;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.664);
+    border-radius: 4px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    font-size: 35px;
+    color: hotpink;
+    border: none;
+    cursor: pointer;
+}
+
+.add-btn, .comprar-btn {
+    box-shadow: 0px 0px -50px #ffffff;
+	background-color:#fd8fb7;
+    border-radius:5px;
+    border: none;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	padding:12px 23px;
+    text-decoration:none;
+    width: 40%;
+}
+
+.add-btn:hover, .comprar-btn:hover {
+    background-color:#fd73a6;
+}
+
+.formulario-pedido {
+    text-align: center;
+    background-color: white;
+    font-size: 17px;
+    width: 480px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.466);
+    border-radius: 4px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 0px 50px 0px;
+}
+
+.confirmacao-pedido {
+    text-align: center;
+    background-color: white;
+    font-size: 17px;
+    width: 480px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.466);
+    border-radius: 4px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 0px 50px 0px;
+}
+
+.confirmacao-pedido a {
+    color: hotpink;
+}

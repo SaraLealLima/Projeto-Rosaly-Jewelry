@@ -9,8 +9,8 @@ class Produto extends Component {
     }
     render() {
         return (
-            <div className="box-produto col-xs-6 col-md-6 col-lg-4">
-                <Imagem src={this.props.produto.imagem} alt= {this.props.produto.nome} />
+            <div onClick={this.props.onClick} className="box-produto col-xs-6 col-md-6 col-lg-4">
+                <Imagem key={this.props.produto.idproduto} src={this.props.produto.imagem} alt= {this.props.produto.nome} />
                 <br/>
                 <p className="nome-produto">{this.props.produto.nome}</p>
                 <hr/>

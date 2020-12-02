@@ -6,24 +6,28 @@ import Produto from '../components/Produto';
 class PaginaProdutos extends Component {
     constructor(props) {
         super(props)
-        this.state={produtos: [], produtosFiltrados: []};
+        this.state = { produtos: [], produtosFiltrados: [] };
     }
 
     componentDidMount() {
-         this.loadAsyncData()
+        this.loadAsyncData()
     }
 
     async loadAsyncData() {
         const resposta = await fetch("http://rosalyjewelrybackend/api/produtos.php");
         const json = await resposta.json();
-        this.setState({produtos: json, produtosFiltrados: json});
-      }
+        this.setState({ produtos: json, produtosFiltrados: json });
+    }
 
-     exibirCategoria(categoria) {
-        let produtosFiltrados = this.state.produtos.filter((produto) => {
-            return produto.categoria == categoria
-        })
-        this.setState({produtos: this.state.produtos, produtosFiltrados: produtosFiltrados})
+    exibirCategoria(categoria) {
+        if (categoria == 'todos') {
+            this.setState({ produtos: this.state.produtos, produtosFiltrados: this.state.produtos })
+        } else {
+            let produtosFiltrados = this.state.produtos.filter((produto) => {
+                return produto.categoria.toLowerCase() == categoria
+            })
+            this.setState({ produtos: this.state.produtos, produtosFiltrados: produtosFiltrados })
+        }
     }
 
 
@@ -56,12 +60,12 @@ class PaginaProdutos extends Component {
                             <aside className="categorias">
                                 <p>CATEGORIAS</p>
                                 <ul>
-                                    <li onClick={ () => this.exibirCategoria('todos')}>Todas as jóias (15)</li>
-                                    <li onClick={ () => this.exibirCategoria('alianca')}>Alianças (3) </li>
-                                    <li onClick={ () => this.exibirCategoria('anel')}>Anéis (3)</li>
-                                    <li onClick={ () => this.exibirCategoria('colar')}>Colares (3) </li>
-                                    <li onClick={ () => this.exibirCategoria('brinco')}>Brincos (3) </li>
-                                    <li onClick={ () => this.exibirCategoria('pulseira')}>Pulseiras (3) </li>
+                                    <li onClick={() => this.exibirCategoria('todos')}>Todas as jóias (15)</li>
+                                    <li onClick={() => this.exibirCategoria('aliança')}>Alianças (3) </li>
+                                    <li onClick={() => this.exibirCategoria('anel')}>Anéis (3)</li>
+                                    <li onClick={() => this.exibirCategoria('colar')}>Colares (3) </li>
+                                    <li onClick={() => this.exibirCategoria('brinco')}>Brincos (3) </li>
+                                    <li onClick={() => this.exibirCategoria('pulseira')}>Pulseiras (3) </li>
                                 </ul>
                             </aside>
                         </Col>
@@ -73,11 +77,11 @@ class PaginaProdutos extends Component {
             </div>
 
 
-    )
+        )
 
     }
 
-    
+
 }
 
 

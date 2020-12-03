@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -30,7 +29,7 @@ export default function App() {
           <Route path="/paginaLojas">
             <PaginaLojas />
           </Route>
-          <Route path="/paginaPedido">
+          <Route path="/paginaPedido/:idproduto">
             <PaginaPedido />
           </Route>
           <Route path="/paginaConfirmacao">

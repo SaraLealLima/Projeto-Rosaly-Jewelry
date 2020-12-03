@@ -4,7 +4,6 @@ import Imagem from './Imagem';
 class Produto extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.state = { }
     }
     render() {

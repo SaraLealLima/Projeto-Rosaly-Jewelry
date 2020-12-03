@@ -1,12 +1,13 @@
-import React, { Component, useEffect, useState } from 'react';
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Produto from '../components/Produto';
-
+import Imagem from '../components/Imagem';
+import { withRouter } from 'react-router-dom';
 
 class PaginaProdutos extends Component {
     constructor(props) {
         super(props)
-        this.state = { produtos: [], produtosFiltrados: [], show: false };
+        this.state = { produtos: [], produtosFiltrados: [], produtoClicado: null, show: false };
     }
 
     componentDidMount() {
@@ -16,28 +17,32 @@ class PaginaProdutos extends Component {
     async loadAsyncData() {
         const resposta = await fetch("http://rosalyjewelrybackend/api/produtos.php");
         const json = await resposta.json();
-        this.setState({ produtos: json, produtosFiltrados: json, show: false });
+        this.setState({ produtos: json, produtosFiltrados: json, produtoClicado: this.state.produtoClicado, show: false });
     }
 
     exibirCategoria(categoria) {
-        if (categoria == 'todos') {
-            this.setState({ produtos: this.state.produtos, produtosFiltrados: this.state.produtos, show: false })
+        if (categoria === 'todos') {
+            this.setState({ produtos: this.state.produtos, produtosFiltrados: this.state.produtos, produtoClicado: this.state.produtoClicado, show: false })
         } else {
             let produtosFiltrados = this.state.produtos.filter((produto) => {
-                return produto.categoria.toLowerCase() == categoria
+                return produto.categoria.toLowerCase() === categoria
             })
-            this.setState({ produtos: this.state.produtos, produtosFiltrados: produtosFiltrados, show: false })
+            this.setState({ produtos: this.state.produtos, produtosFiltrados: produtosFiltrados, produtoClicado: this.state.produtoClicado, show: false })
         }
     }
 
     handleClose() {
-        this.setState({...this.state, show: false })
+        this.setState({produtos: this.state.produtos, produtosFiltrados: this.state.produtosFiltrados, produtoClicado: this.state.produtoClicado, show: false })
     }
 
-    handleOpen() {
-        this.setState({...this.state, show: true })
+    handleOpen(produto) {
+        this.setState({produtos: this.state.produtos, produtosFiltrados: this.state.produtosFiltrados, produtoClicado: produto, show: true})
     }
 
+
+    irParaPaginaPedido(idproduto) {
+        this.props.history.push("/paginaPedido/"+idproduto)
+    }
 
     render() {
         return (
@@ -55,10 +60,10 @@ class PaginaProdutos extends Component {
                 <div className="container mb-5 w-50">
                     <div className="alert alert-warning" role="alert">
                         <strong>Atenção</strong>, promoção válida apenas para esse mês!
-                </div>
+                    </div>
                     <div className="alert alert-primary" role="alert">
                         <strong>FRETE GRÁTIS</strong> para compras de 2 jóias ou mais!
-                </div>
+                    </div>
                 </div>
 
                 <br />
@@ -78,24 +83,24 @@ class PaginaProdutos extends Component {
                             </aside>
                         </Col>
                         <Col sm={12} md={8} lg={9}>
-                            {this.state.produtosFiltrados && this.state.produtosFiltrados.map(produto => <Produto onClick={() => this.handleOpen()} produto={produto} />)}
+                            {this.state.produtosFiltrados && this.state.produtosFiltrados.map(produto => <Produto onClick={() => this.handleOpen(produto)} produto={produto} key={produto.idproduto} />)}
                         </Col>
                     </Row>
                 </Container>
 
                 <Modal show={this.state.show} onHide={() => this.handleClose()}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={() => this.handleClose()}>
-                            Close
-                         </Button>
-                        <Button variant="primary" onClick={() => this.handleClose()}>
-                            Save Changes
-                        </Button>
-                    </Modal.Footer>
+                    <Modal.Header closeButton bsPrefix="modal-header-custom mt-4 mr-4"> </Modal.Header>
+                    {this.state.produtoClicado === null ? '' : 
+                     <div className="modal-box-produto mb-5">
+                        <Imagem key={this.state.produtoClicado.idproduto} src={this.state.produtoClicado.imagem} alt= {this.state.produtoClicado.nome} />
+                        <br/>
+                        <p className="modal-nome-produto">{this.state.produtoClicado.nome}</p>
+                        <br/>
+                        <p className="modal-antigo-preco">{this.state.produtoClicado.preco}</p>
+                        <p className="modal-novo-preco">{this.state.produtoClicado.novopreco}</p>
+    
+                        <button className="comprar-btn" id="btn-comprar" onClick={() => this.irParaPaginaPedido(this.state.produtoClicado.idproduto)} >Comprar</button>
+                     </div>}
                 </Modal>
 
             </div>
@@ -109,4 +114,4 @@ class PaginaProdutos extends Component {
 }
 
 
-export default PaginaProdutos;
+export default withRouter(PaginaProdutos);

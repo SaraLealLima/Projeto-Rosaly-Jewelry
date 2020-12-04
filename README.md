@@ -6,7 +6,11 @@ Coloque a pasta de backend na pasta www do Wamp ou htdocs do Xampp.
 ### Terceiro 
 Acesse o localhost e acesse a pagina de backend, copie o caminho .
 ### Quarto 
-Entre em cada fetch, apague a url até /api e cole o caminho copiado 
+Entre em cada fetch, apague a url até /api e cole o caminho copiado. Existem 6 links a serem alterados: 
+- um link em components/Imagem 
+- dois fetch em paginas/PaginaContato
+- dois fetch em paginas/PaginaPedido
+- um fetch em paginas/PaginaProdutos
 
 
 

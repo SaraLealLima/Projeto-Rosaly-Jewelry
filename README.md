@@ -1,11 +1,11 @@
 # ANTES DE TUDO... É preciso alterar os links de fetch para que tudo funcione para você.
-## Primeiro
+### Primeiro
 Instale o banco de dados.
-## Segundo
+### Segundo
 Coloque a pasta de backend na pasta www do Wamp ou htdocs do Xampp.
-## Terceiro 
+### Terceiro 
 Acesse o localhost e acesse a pagina de backend, copie o caminho .
-## Quarto 
+### Quarto 
 Entre em cada fetch, apague a url até /api e cole o caminho copiado 
 
 

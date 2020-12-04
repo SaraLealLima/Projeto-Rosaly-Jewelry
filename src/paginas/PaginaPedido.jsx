@@ -19,6 +19,20 @@ class PaginaPedido extends Component {
         this.setState({ produto: json });
     }
 
+    async postarPedido(evento) {
+        evento.preventDefault()
+        const formPedido = new FormData(evento.target);
+        const resposta = await fetch('http://rosalyjewelrybackend/api/pedido.php', {
+            body: formPedido, 
+            method: 'POST', 
+        })
+        if (resposta.status === 200) {
+            this.props.history.push("/paginaConfirmacao")
+        } else {
+            alert('Erro: O pedido não pode ser concluído.')
+        }
+    }
+
     render() {
         return (
             <div className="corpo-pedido">
@@ -32,26 +46,26 @@ class PaginaPedido extends Component {
                         <div className="row justify-content-center">
                             <div className="col-sm-8 col-md-9 col-lg-9">
 
-                                <form>
+                                <form onSubmit={(evento)=> this.postarPedido(evento)}>
                                     <div className="form-group">
-                                        <label for="nomeproduto">Nome do produto</label> <br />
-                                        <input className="form-control" type="text" name="nomeproduto" required value={this.state.produto.nome} />
+                                        <label htmlFor="nomeproduto">Nome do produto</label> <br />
+                                        <input className="form-control" type="text" name="nomeproduto" required defaultValue={this.state.produto.nome} readOnly />
                                         <br /><br />
 
-                                        <label for="valorunitario">Preço</label> <br />
-                                        <input className="form-control" type="number" name="valorunitario" required value={this.state.produto.novopreco} />
+                                        <label htmlFor="valorunitario">Preço</label> <br />
+                                        <input className="form-control" type="number" name="valorunitario" required defaultValue={this.state.produto.novopreco} readOnly />
                                         <br /><br />
 
-                                        <label for="quantidade">Quantidade</label> <br />
-                                        <input className="form-control" type="number" name="quantidade" required value="1" /> <br /><br />
+                                        <label htmlFor="quantidade">Quantidade</label> <br />
+                                        <input className="form-control" type="number" name="quantidade" required defaultValue="1" /> <br /><br />
 
-                                        <label for="nomecliente">Nome do cliente</label> <br />
+                                        <label htmlFor="nomecliente">Nome do cliente</label> <br />
                                         <input className="form-control" type="text" name="nomecliente" required /> <br /><br />
 
-                                        <label for="endereco">Endereço</label> <br />
+                                        <label htmlFor="endereco">Endereço</label> <br />
                                         <input className="form-control" type="text" name="endereco" required /> <br /><br />
 
-                                        <label for="telefone">Telefone</label> <br />
+                                        <label htmlFor="telefone">Telefone</label> <br />
                                         <input className="form-control" type="tel" name="telefone" required /> <br /><br /><br />
 
                                         <button type="submit" className="comprar-btn">Fazer pedido</button>

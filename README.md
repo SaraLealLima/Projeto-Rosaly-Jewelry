@@ -4,7 +4,7 @@ Instale o banco de dados.
 ### Segundo
 Coloque a pasta de backend na pasta www do Wamp ou htdocs do Xampp.
 ### Terceiro 
-Acesse o localhost e acesse a pagina de backend, copie o caminho .
+Acesse o localhost e acesse a pasta de backend, copie o caminho .
 ### Quarto 
 Entre em cada fetch, apague a url até /api e cole o caminho copiado. Existem 6 links a serem alterados: 
 - um link em components/Imagem 

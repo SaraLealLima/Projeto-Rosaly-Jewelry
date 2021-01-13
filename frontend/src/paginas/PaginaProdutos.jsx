@@ -15,7 +15,7 @@ class PaginaProdutos extends Component {
     }
 
     async loadAsyncData() {
-        const resposta = await fetch("http://localhost:3030/api/produtos");
+        const resposta = await fetch("/api/produtos");
         const json = await resposta.json();
         this.setState({ produtos: json, produtosFiltrados: json, produtoClicado: this.state.produtoClicado, show: false });
     }

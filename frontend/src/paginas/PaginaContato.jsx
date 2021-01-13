@@ -12,7 +12,7 @@ class PaginaContato extends Component {
     }
 
     async loadAsyncData() {
-        const resposta = await fetch("http://localhost:3030/api/getmensagens");
+        const resposta = await fetch("/api/getmensagens");
         const json = await resposta.json();
         this.setState({ mensagens: json});
     }
@@ -22,7 +22,7 @@ class PaginaContato extends Component {
         evento.preventDefault()
         const formMensagem = new FormData(evento.target);
         console.log(evento)
-        const resposta = await fetch('http://localhost:3030/api/mensagem', {
+        const resposta = await fetch('/api/mensagem', {
             body: JSON.stringify(Object.fromEntries(formMensagem)), 
             method: 'POST', 
             headers: new Headers({'content-type': 'application/json'})

@@ -14,7 +14,7 @@ class PaginaPedido extends Component {
 
     async loadAsyncData() {
         let idproduto = this.props.match.params.idproduto;
-        const resposta = await fetch("http://rosalyjewelrybackend/api/produto.php?idproduto=" + idproduto);
+        const resposta = await fetch("http://localhost:3030/api/produto?idproduto=" + idproduto);
         const json = await resposta.json();
         this.setState({ produto: json });
     }
@@ -22,9 +22,10 @@ class PaginaPedido extends Component {
     async postarPedido(evento) {
         evento.preventDefault()
         const formPedido = new FormData(evento.target);
-        const resposta = await fetch('http://rosalyjewelrybackend/api/pedido.php', {
-            body: formPedido, 
+        const resposta = await fetch('http://localhost:3030/api/pedido', {
+            body: JSON.stringify(Object.fromEntries(formPedido)), 
             method: 'POST', 
+            headers: new Headers({'content-type': 'application/json'})
         })
         if (resposta.status === 200) {
             this.props.history.push("/paginaConfirmacao")

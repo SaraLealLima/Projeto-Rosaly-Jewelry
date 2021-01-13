@@ -12,7 +12,7 @@ class PaginaContato extends Component {
     }
 
     async loadAsyncData() {
-        const resposta = await fetch("http://rosalyjewelrybackend/api/getmensagens.php");
+        const resposta = await fetch("http://localhost:3030/api/getmensagens");
         const json = await resposta.json();
         this.setState({ mensagens: json});
     }
@@ -22,9 +22,10 @@ class PaginaContato extends Component {
         evento.preventDefault()
         const formMensagem = new FormData(evento.target);
         console.log(evento)
-        const resposta = await fetch('http://rosalyjewelrybackend/api/mensagem.php', {
-            body: formMensagem, 
+        const resposta = await fetch('http://localhost:3030/api/mensagem', {
+            body: JSON.stringify(Object.fromEntries(formMensagem)), 
             method: 'POST', 
+            headers: new Headers({'content-type': 'application/json'})
         })
         console.log(await resposta.text())
         if (resposta.status === 200) {
@@ -83,7 +84,7 @@ class PaginaContato extends Component {
                         <h3>Comentários dos nossos clientes:</h3> <br/>
                         <ListGroup>
                         {this.state.mensagens.map(mensagem => (
-                            <ListGroup.Item>
+                            <ListGroup.Item key={mensagem.mensagem}>
                             <h5>{mensagem.nome_cliente}</h5>
                             <p>{mensagem.mensagem}</p>
                             </ListGroup.Item>

@@ -1,17 +1,5 @@
-# ANTES DE TUDO... É preciso alterar os links de fetch para que tudo funcione para você.
-### Primeiro
-Instale o banco de dados.
-### Segundo
-Coloque a pasta de backend na pasta www do Wamp ou htdocs do Xampp.
-### Terceiro 
-Acesse o localhost e acesse a pasta de backend, copie o caminho .
-### Quarto 
-Entre em cada fetch, apague a url até /api e cole o caminho copiado. Existem 6 links a serem alterados: 
-- um link em components/Imagem 
-- dois fetch em paginas/PaginaContato
-- dois fetch em paginas/PaginaPedido
-- um fetch em paginas/PaginaProdutos
-
+## Rosaly Jewelry
+Projeto de site de uma joalheria feito no curso da Recode Pro, com frontend refatorado em React.js e backend refatorado em Node.js
 
 
 # Getting Started with Create React App

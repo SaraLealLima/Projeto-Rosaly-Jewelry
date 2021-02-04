@@ -1,8 +1,11 @@
 import { combineReducers, createStore } from 'redux'
 import { categoriasReducer } from './reducers/categoriasReducer'
+import { produtoSelecionadoReducer } from './reducers/produtoSelecionadoReducer'
+
 
 var reducers = combineReducers({
-    categoriasState: categoriasReducer
+    categoriasState: categoriasReducer,
+    prodSelecionadoState: produtoSelecionadoReducer
 })
 
 

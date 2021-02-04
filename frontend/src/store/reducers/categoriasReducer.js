@@ -1,4 +1,4 @@
-import { CATEGORIA_CLICADA } from '../actions'
+import { CATEGORIA_CLICADA } from '../actions/categoriasActions'
 
 var estadoInicial = {
     categorias: [

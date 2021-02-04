@@ -3,7 +3,7 @@ import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Produto from '../components/Produto';
 import Imagem from '../components/Imagem';
 import { withRouter } from 'react-router-dom';
-import { cliqueCategoria } from '../store/actions/index'
+import { cliqueCategoria } from '../store/actions/categoriasActions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
@@ -77,7 +77,7 @@ class PaginaProdutos extends Component {
                             <aside className="categorias">
                                 <p>CATEGORIAS</p>
                                 <ul>
-                                    {this.props.categorias.map((categoria) => <li onClick={() => this.props.cliqueCategoria(categoria.valor)}>{categoria.texto}</li>)}
+                                    {this.props.categorias.map((categoria) => <li key={categoria.valor} onClick={() => this.props.cliqueCategoria(categoria.valor)}>{categoria.texto}</li>)}
                                 </ul>
                             </aside>
                         </Col>

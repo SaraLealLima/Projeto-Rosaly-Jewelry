@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import Imagem from '../components/Imagem';
+import { selecionarProduto } from '../store/actions/produtoSelecionadoActions'
 
 class PaginaPedido extends Component {
     constructor(props) {
         super(props)
-        this.state = { produto: null }
     }
 
     componentDidMount() {
-        this.loadAsyncData()
+        if (this.props.produtoSelecionado === null) {
+            this.loadAsyncData()
+        }
     }
 
     async loadAsyncData() {
         let idproduto = this.props.match.params.idproduto;
         const resposta = await fetch("/api/produto?idproduto=" + idproduto);
         const json = await resposta.json();
-        this.setState({ produto: json });
+        this.props.selecionarProduto(json)
     }
 
     async postarPedido(evento) {
@@ -37,12 +41,12 @@ class PaginaPedido extends Component {
     render() {
         return (
             <div className="corpo-pedido">
-                {this.state.produto === null ? '' :
+                {this.props.produtoSelecionado === null ? '' :
                     <div className="formulario-pedido">
 
                         <p className="novo-preco">Preencha o formulário abaixo para realizar o pedido</p>
 
-                        <Imagem key={this.state.produto.idproduto} src={this.state.produto.imagem} alt= {this.state.produto.nome} />
+                        <Imagem key={this.props.produtoSelecionado.idproduto} src={this.props.produtoSelecionado.imagem} alt= {this.props.produtoSelecionado.nome} />
 
                         <div className="row justify-content-center">
                             <div className="col-sm-8 col-md-9 col-lg-9">
@@ -50,11 +54,11 @@ class PaginaPedido extends Component {
                                 <form onSubmit={(evento)=> this.postarPedido(evento)}>
                                     <div className="form-group">
                                         <label htmlFor="nomeproduto">Nome do produto</label> <br />
-                                        <input className="form-control" type="text" name="nomeproduto" required defaultValue={this.state.produto.nome} readOnly />
+                                        <input className="form-control" type="text" name="nomeproduto" required defaultValue={this.props.produtoSelecionado.nome} readOnly />
                                         <br /><br />
 
                                         <label htmlFor="valorunitario">Preço</label> <br />
-                                        <input className="form-control" type="number" name="valorunitario" required defaultValue={this.state.produto.novopreco} readOnly />
+                                        <input className="form-control" type="number" name="valorunitario" required defaultValue={this.props.produtoSelecionado.novopreco} readOnly />
                                         <br /><br />
 
                                         <label htmlFor="quantidade">Quantidade</label> <br />
@@ -82,4 +86,10 @@ class PaginaPedido extends Component {
     }
 }
 
-export default withRouter(PaginaPedido);
+const mapStateToProps = store => ({
+    produtoSelecionado: store.prodSelecionadoState.produtoSelecionado
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ selecionarProduto }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PaginaPedido));

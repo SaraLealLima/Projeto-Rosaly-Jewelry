@@ -4,13 +4,14 @@ import Produto from '../components/Produto';
 import Imagem from '../components/Imagem';
 import { withRouter } from 'react-router-dom';
 import { cliqueCategoria } from '../store/actions/categoriasActions'
+import { selecionarProduto} from '../store/actions/produtoSelecionadoActions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
 class PaginaProdutos extends Component {
     constructor(props) {
         super(props)
-        this.state = { produtos: [], produtoClicado: null, show: false };
+        this.state = { produtos: [], show: false };
     }
 
     componentDidMount() {
@@ -20,16 +21,17 @@ class PaginaProdutos extends Component {
     async loadAsyncData() {
         const resposta = await fetch("/api/produtos");
         const json = await resposta.json();
-        this.setState({ produtos: json, produtoClicado: this.state.produtoClicado, show: false });
+        this.setState({ produtos: json, show: false });
     }
 
 
     handleClose() {
-        this.setState({ produtos: this.state.produtos, produtoClicado: this.state.produtoClicado, show: false })
+        this.setState({ produtos: this.state.produtos, show: false })
     }
 
     handleOpen(produto) {
-        this.setState({ produtos: this.state.produtos, produtoClicado: produto, show: true })
+        this.props.selecionarProduto(produto)
+        this.setState({ produtos: this.state.produtos, show: true })
     }
 
 
@@ -82,23 +84,23 @@ class PaginaProdutos extends Component {
                             </aside>
                         </Col>
                         <Col sm={12} md={8} lg={9}>
-                            {produtosFiltrados && produtosFiltrados.map(produto => <Produto onClick={() => this.handleOpen(produto)} produto={produto} key={produto.idproduto} />)}
+                            {produtosFiltrados.map(produto => <Produto onClick={() => this.handleOpen(produto)} produto={produto} key={produto.idproduto} />)}
                         </Col>
                     </Row>
                 </Container>
 
                 <Modal show={this.state.show} onHide={() => this.handleClose()}>
                     <Modal.Header closeButton bsPrefix="modal-header-custom mt-4 mr-4"> </Modal.Header>
-                    {this.state.produtoClicado === null ? '' :
+                    {this.props.produtoSelecionado === null ? '' :
                         <div className="modal-box-produto mb-5">
-                            <Imagem key={this.state.produtoClicado.idproduto} src={this.state.produtoClicado.imagem} alt={this.state.produtoClicado.nome} />
+                            <Imagem key={this.props.produtoSelecionado.idproduto} src={this.props.produtoSelecionado.imagem} alt={this.props.produtoSelecionado.nome} />
                             <br />
-                            <p className="modal-nome-produto">{this.state.produtoClicado.nome}</p>
+                            <p className="modal-nome-produto">{this.props.produtoSelecionado.nome}</p>
                             <br />
-                            <p className="modal-antigo-preco">{this.state.produtoClicado.preco}</p>
-                            <p className="modal-novo-preco">{this.state.produtoClicado.novopreco}</p>
+                            <p className="modal-antigo-preco">{this.props.produtoSelecionado.preco}</p>
+                            <p className="modal-novo-preco">{this.props.produtoSelecionado.novopreco}</p>
 
-                            <button className="comprar-btn" id="btn-comprar" onClick={() => this.irParaPaginaPedido(this.state.produtoClicado.idproduto)} >Comprar</button>
+                            <button className="comprar-btn" id="btn-comprar" onClick={() => this.irParaPaginaPedido(this.props.produtoSelecionado.idproduto)} >Comprar</button>
                         </div>}
                 </Modal>
 
@@ -114,9 +116,10 @@ class PaginaProdutos extends Component {
 
 const mapStateToProps = store => ({
     categorias: store.categoriasState.categorias,
-    categoriaSelecionada: store.categoriasState.categoriaSelecionada
+    categoriaSelecionada: store.categoriasState.categoriaSelecionada,
+    produtoSelecionado: store.prodSelecionadoState.produtoSelecionado
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ cliqueCategoria }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ cliqueCategoria, selecionarProduto }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PaginaProdutos));

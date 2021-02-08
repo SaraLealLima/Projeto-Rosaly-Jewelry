@@ -1,7 +1,7 @@
 import React, {Component, lazy, Suspense} from 'react';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 // import Produto from '../components/Produto';
-// import Imagem from '../components/Imagem';
+import Imagem from '../components/Imagem';
 import { withRouter } from 'react-router-dom';
 import { cliqueCategoria } from '../store/actions/categoriasActions'
 import { selecionarProduto} from '../store/actions/produtoSelecionadoActions'
@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import loading from '../images/loading.png'
 
 const Produto = lazy(() => import('../components/Produto'));
-const Imagem = lazy(() => import('../components/Imagem'));
 
 class PaginaProdutos extends Component {
     constructor(props) {

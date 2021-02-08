@@ -236,3 +236,8 @@ footer {
 .confirmacao-pedido a {
     color: hotpink;
 }
+
+.loadingImagem {
+    display: table; 
+    margin: 0 auto;
+}

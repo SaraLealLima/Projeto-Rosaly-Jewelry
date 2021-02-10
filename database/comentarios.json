@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "60234c8bdaddd721d49f5399"
+  },
+  "email": "heitobernardes@gmail.com",
+  "nome_cliente": "Heitor Bernardes",
+  "mensagem": "Comprei as alianças do meu casamento pela Rosaly Jewelry e foi a melhor escolha que fiz! (depois de casar, é claro)"
+},{
+  "_id": {
+    "$oid": "60234cb0daddd721d49f539a"
+  },
+  "email": "carlosfonseca@gmail.com",
+  "nome_cliente": "Carlos Emanuel da Fonseca",
+  "mensagem": "Sempre dou de presente as jóias pra minha esposa e filha e elas amam demais. 10/10"
+},{
+  "_id": {
+    "$oid": "60234ccfdaddd721d49f539b"
+  },
+  "email": "elizabethmargarida@gmail.com",
+  "nome_cliente": "Elizabeth Margarida Silva",
+  "mensagem": "Amooo essa loja, tenho todos os brincos e sou apaixonada por eles!! Lindooos!"
+},{
+  "_id": {
+    "$oid": "60234ceddaddd721d49f539c"
+  },
+  "email": "gabrielladt@gmail.com",
+  "nome_cliente": "Gabriella Daniella Tantarella",
+  "mensagem": "EU TENHO TODOS OS COLARESSS, QUERO QUE LANCEM MAISS!!!"
+},{
+  "_id": {
+    "$oid": "60234d05daddd721d49f539d"
+  },
+  "email": "rosemeyrer@gmail.com",
+  "nome_cliente": "Rosemeyre Rosane",
+  "mensagem": "Atendimento maravilhosooo por parte da loja, tudo chegou certinho e eu estou amando os anéis novos ❤"
+},{
+  "_id": {
+    "$oid": "60234d19daddd721d49f539e"
+  },
+  "email": "sandromalabarison@gmail.com",
+  "nome_cliente": "Sandro Malabarison",
+  "mensagem": "Vim comprar miçanga, mas me encantei com as jóias. A Rosaly é top"
+},{
+  "_id": {
+    "$oid": "60234d2ddaddd721d49f539f"
+  },
+  "email": "pao@queijo.minas.br",
+  "nome_cliente": "Mineiro de MG",
+  "mensagem": "Melhor que pão de queijo"
+}]

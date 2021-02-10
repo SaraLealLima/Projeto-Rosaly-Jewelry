@@ -3,6 +3,7 @@ const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const mysql = require('mysql2')
 const cors = require('cors')
+const { inserirComentario, pegarComentarios } = require('./comentarios')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -52,37 +53,56 @@ app.get('/api/produto', (req, res) => {
     })
 })
 
-
-app.get('/api/getmensagens', (req, res) => {
-    let sql = "SELECT nome_cliente, mensagem FROM mensagens JOIN clientes ON clientes.id_cliente = mensagens.id_cliente LIMIT 10"
-    conexaoDB.query(sql, (error, result) => {
-        if (error) {
-            console.log('Erro ' + error)
-        } else {
-            res.send(result)
-        }
-    })
+app.get('/api/getmensagens', async (req, res) => {
+    const result = await pegarComentarios()
+    res.send(result)
 })
 
-app.post('/api/mensagem', (req, res) => {
+
+app.post('/api/mensagem', async (req, res) => {
     let post = req.body
-    let email = post.email
-    let nome = post.nome
-    let mensagem = post.mensagem
+
+    var comentario = {
+        email: post.email,
+        nome_cliente: post.nome,
+        mensagem: post.mensagem
+    }
+
+    const result = await inserirComentario(comentario) 
+    res.send(result)
+})
+
+// app.get('/api/getmensagens', (req, res) => {
+//     let sql = "SELECT nome_cliente, mensagem FROM mensagens JOIN clientes ON clientes.id_cliente = mensagens.id_cliente LIMIT 10"
+//     conexaoDB.query(sql, (error, result) => {
+//         if (error) {
+//             console.log('Erro ' + error)
+//         } else {
+//             res.send(result)
+//         }
+//     })
+// })
+
+
+// app.post('/api/mensagem', (req, res) => {
+//     let post = req.body
+//     let email = post.email
+//     let nome = post.nome
+//     let mensagem = post.mensagem
     
-    let sql1 = `INSERT INTO clientes (id_cliente, nome_cliente, email) VALUES(DEFAULT, '${nome}', '${email}')`
-    let sql2 = `SELECT id_cliente FROM clientes WHERE email = '${email}'order by id_cliente desc limit 1`
+//     let sql1 = `INSERT INTO clientes (id_cliente, nome_cliente, email) VALUES(DEFAULT, '${nome}', '${email}')`
+//     let sql2 = `SELECT id_cliente FROM clientes WHERE email = '${email}'order by id_cliente desc limit 1`
     
 
-    conexaoDB.query(sql1, (error, result) => {
-        conexaoDB.query(sql2, (error, result) => {
-            let sql3 = `INSERT INTO mensagens (id_msg, id_cliente, mensagem) VALUES (DEFAULT, '${result[0].id_cliente}', '${mensagem}')`
-            conexaoDB.query(sql3, (error, result) => {
-                res.send('Mensagem postada com muito inabalável sucesso')
-            }) 
-        })
-    })
-})
+//     conexaoDB.query(sql1, (error, result) => {
+//         conexaoDB.query(sql2, (error, result) => {
+//             let sql3 = `INSERT INTO mensagens (id_msg, id_cliente, mensagem) VALUES (DEFAULT, '${result[0].id_cliente}', '${mensagem}')`
+//             conexaoDB.query(sql3, (error, result) => {
+//                 res.send('Mensagem postada com muito inabalável sucesso')
+//             }) 
+//         })
+//     })
+// })
 
 app.post('/api/pedido', (req, res) => {
     const pedido = req.body
